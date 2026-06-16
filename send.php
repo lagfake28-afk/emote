@@ -1,7 +1,7 @@
 <?php
 
 $botToken = "8353093396:AAEu22kcF4PLhYC-K68woIsW9bGNpv33pZI";
-$chatId   = "7931320938";
+$chatId = 7931320938;
 
 $message = $_POST['message'];
 
@@ -9,7 +9,7 @@ $url = "https://api.telegram.org/bot$botToken/sendMessage";
 
 $data = [
     "chat_id" => $chatId,
-    "text" => "From Website:\n" . $message
+    "text" => $message
 ];
 
 $options = [
@@ -21,7 +21,7 @@ $options = [
 ];
 
 $context = stream_context_create($options);
-file_get_contents($url, false, $context);
+$result = file_get_contents($url, false, $context);
 
-echo "OK";
+echo $result;
 ?>
