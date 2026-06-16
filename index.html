@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Panel</title>
+  <style>
+    body { font-family: Arial; background:#111; color:white; text-align:center; }
+    .box { display:none; margin-top:20px; }
+    input, button {
+      padding:10px; margin:5px; width:250px;
+    }
+    .login {
+      margin-top:100px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login">
+  <h2>Login</h2>
+  <input type="password" id="pass" placeholder="Enter Password">
+  <br>
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="box" id="panel">
+  <h2>Message Panel</h2>
+
+  <input id="m1" placeholder="Message 1"><br>
+  <input id="m2" placeholder="Message 2"><br>
+  <input id="m3" placeholder="Message 3"><br>
+  <input id="m4" placeholder="Message 4"><br>
+  <input id="m5" placeholder="Message 5"><br>
+
+  <button onclick="send()">Send to Telegram</button>
+</div>
+
+<script>
+function login(){
+  let pass = document.getElementById("pass").value;
+
+  if(pass === "1234"){
+    document.querySelector(".login").style.display="none";
+    document.getElementById("panel").style.display="block";
+  } else {
+    alert("Wrong password");
+  }
+}
+
+function send(){
+  let data = {
+    m1: document.getElementById("m1").value,
+    m2: document.getElementById("m2").value,
+    m3: document.getElementById("m3").value,
+    m4: document.getElementById("m4").value,
+    m5: document.getElementById("m5").value
+  };
+
+  fetch("http://localhost:3000/send", {
+    method:"POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(data)
+  })
+  .then(res=>res.text())
+  .then(msg=>alert(msg));
+}
+</script>
+
+</body>
+</html>
