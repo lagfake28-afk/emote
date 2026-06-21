@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body style="background:#111;color:white;padding:20px;">
+
+<h2>Key Generator Panel</h2>
+
+<a href="/logout">Logout</a>
+
+<hr>
+
+<h3>Create Key</h3>
+
+<form method="POST">
+    <input name="key" placeholder="Enter Key">
+    <input name="days" placeholder="Days (expiry)">
+    <button type="submit">Generate</button>
+</form>
+
+<hr>
+
+<h3>All Keys</h3>
+
+<ul>
+{% for k,v in keys.items() %}
+    <li>
+        🔑 {{k}} | Expire: {{v.expire}} | Device: {{v.device}}
+    </li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
